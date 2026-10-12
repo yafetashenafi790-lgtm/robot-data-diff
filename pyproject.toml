@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "robot-data-diff"
+version = "0.1.0"
+description = "Episode-aware diff for LeRobot robot-training datasets: what changed in the data since the last good run?"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = [
+    "pyarrow>=12",
+    "pandas>=2",
+    "numpy>=1.24",
+    "huggingface_hub>=0.20",
+]
+
+[project.scripts]
+robot-data-diff = "robot_data_diff.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["robot_data_diff*"]

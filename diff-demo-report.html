@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>robot-data-diff report</title>
+<style>
+body { font-family: system-ui, sans-serif; max-width: 1000px; margin: 2em auto; padding: 0 1em; }
+table { border-collapse: collapse; width: 100%; margin: 1em 0; }
+th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; font-size: 14px; }
+th { background: #f4f4f4; } .hl { background: #fff8e1; }
+code { background: #f4f4f4; padding: 1px 5px; border-radius: 3px; }
+h1 { font-size: 1.4em; } h2 { font-size: 1.1em; margin-top: 1.6em; }
+</style></head><body>
+<h1>robot-data-diff report</h1>
+<p><b>A:</b> testdata/pusht <code>v3.0</code> (206 episodes)<br>
+<b>B:</b> testdata/pusht_v2 <code>v3.0</code> (201 episodes)</p>
+<p><b>Policy checkpoint:</b> ckpt-42</p>
+<h2>Episode inventory</h2>
+<p>206 &rarr; 201 episodes &mdash;
++1 added, &minus;6 removed,
+~5 changed, =195 unchanged</p>
+<p>Added: <code>[206]</code><br>Removed: <code>[200, 201, 202, 203, 204, 205]</code></p>
+<h2>Changed episodes</h2>
+<table><tr><th>ep</th><th>length</th><th>&Delta;action_min</th>
+<th>&Delta;action_max</th><th>&Delta;idle</th><th>&Delta;spikes</th></tr>
+<tr><td>0</td><td>161 &rarr; 161 (+0)</td><td>[+46.5000, +35.5000]</td><td>[+187.5000, +224.5000]</td><td>0.0</td><td>0</td></tr>
+<tr><td>1</td><td>118 &rarr; 118 (+0)</td><td>[+22.0000, +79.0000]</td><td>[+179.5000, +226.5000]</td><td>0.0</td><td>0</td></tr>
+<tr><td>2</td><td>141 &rarr; 141 (+0)</td><td>[+42.5000, +28.0000]</td><td>[+123.5000, +187.0000]</td><td>0.0</td><td>0</td></tr>
+<tr><td>3</td><td>159 &rarr; 159 (+0)</td><td>[+100.0000, +84.0000]</td><td>[+255.5000, +222.0000]</td><td>0.0</td><td>0</td></tr>
+<tr><td>4</td><td>159 &rarr; 159 (+0)</td><td>[+87.5000, +64.5000]</td><td>[+195.0000, +192.0000]</td><td>0.0</td><td>0</td></tr></table>
+<h2>Task inventory</h2>
+<table><tr><th>task</th><th>A</th><th>B</th></tr><tr class="hl"><td>Push the T-shaped block onto the T-shaped target.</td><td>206</td><td>201</td></tr></table>
+<h2>Schema drift</h2>
+<p>Added: <code>[]</code><br>
+Removed: <code>[]</code><br>
+Changed: <code>[]</code></p>
+<h2>Quality summary</h2>
+<p>Mean idle-frame ratio: 0.0309 &rarr; 0.0315 (+0.0006)<br>Total action spikes: 25 &rarr; 27 (+2)</p>
+</body></html>

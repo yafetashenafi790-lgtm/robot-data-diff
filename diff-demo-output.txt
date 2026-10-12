@@ -1,0 +1,53 @@
+========================================================================
+robot-data-diff  —  episode-aware dataset diff
+========================================================================
+A: testdata/pusht   (v3.0, 206 episodes, 10 fps)
+B: testdata/pusht_v2   (v3.0, 201 episodes, 10 fps)
+policy checkpoint: ckpt-42
+
+Episodes: 206 -> 201 (+1 added, -6 removed, ~5 changed, =195 unchanged)
+  added:   [206]
+  removed: [200, 201, 202, 203, 204, 205]
+
+CHANGED EPISODES (5):
+  [ep 0] length 161 -> 161 (+0 frames)
+           d(action_min)  [+46.5000, +35.5000]
+           d(action_max)  [+187.5000, +224.5000]
+           d(action_mean) [+104.5031, +144.1553]
+           d(idle_ratio)  +0.0000
+           d(spikes)      +0
+  [ep 1] length 118 -> 118 (+0 frames)
+           d(action_min)  [+22.0000, +79.0000]
+           d(action_max)  [+179.5000, +226.5000]
+           d(action_mean) [+91.4746, +159.1737]
+           d(idle_ratio)  +0.0000
+           d(spikes)      +0
+  [ep 2] length 141 -> 141 (+0 frames)
+           d(action_min)  [+42.5000, +28.0000]
+           d(action_max)  [+123.5000, +187.0000]
+           d(action_mean) [+71.1596, +114.7482]
+           d(idle_ratio)  +0.0000
+           d(spikes)      +0
+  [ep 3] length 159 -> 159 (+0 frames)
+           d(action_min)  [+100.0000, +84.0000]
+           d(action_max)  [+255.5000, +222.0000]
+           d(action_mean) [+168.0251, +130.3113]
+           d(idle_ratio)  +0.0000
+           d(spikes)      +0
+  [ep 4] length 159 -> 159 (+0 frames)
+           d(action_min)  [+87.5000, +64.5000]
+           d(action_max)  [+195.0000, +192.0000]
+           d(action_mean) [+144.3522, +121.6572]
+           d(idle_ratio)  +0.0000
+           d(spikes)      +0
+
+TASK INVENTORY (episodes per task: A -> B):
+  * Push the T-shaped block onto the T-shaped target.                206 ->   201
+
+Schema: identical feature sets.
+
+QUALITY SUMMARY (heuristic, CPU-only):
+  mean idle-frame ratio: 0.0309 -> 0.0315 (+0.0006)
+  total action spikes:   25 -> 27 (+2)
+
+========================================================================
