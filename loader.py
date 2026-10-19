@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -65,12 +66,28 @@ def _strip_no_proxy():
         os.environ.pop(k, None)
 
 
+def _namespaced_cache_dir(cache_dir: str | Path, repo_id: str,
+                          revision: str) -> Path:
+    """Give each repo@revision its own subdirectory under cache_dir.
+
+    snapshot_download() never evicts stale files from local_dir, so pointing
+    two different repos/revisions at one flat directory silently mixes files
+    and produces wrong diffs. Namespacing keeps every download isolated while
+    still reusing the cache when the same ref is diffed again.
+    """
+    safe = lambda s: re.sub(r"[^A-Za-z0-9._-]", "_", s)
+    return (Path(cache_dir) / safe(repo_id.replace("/", "__"))
+            / safe(revision or "main"))
+
+
 def resolve_ref(ref: str, cache_dir: str | Path | None = None) -> Path:
     """Turn a dataset reference into a local directory Path.
 
     Accepts a local path, or a Hugging Face dataset id like
     "lerobot/pusht" or "lerobot/pusht@<revision>".  HF downloads fetch
-    meta/** and data/** only — videos are skipped.
+    meta/** and data/** only — videos are skipped.  When cache_dir is given,
+    each repo@revision gets its own subdirectory inside it, so diffs never
+    read each other's files.
     """
     p = Path(ref)
     if p.exists():
@@ -84,12 +101,14 @@ def resolve_ref(ref: str, cache_dir: str | Path | None = None) -> Path:
             f"'{ref}' is not a local path and not a Hugging Face id "
             "(expected like 'lerobot/pusht' or 'lerobot/pusht@<rev>')."
         )
+    local_dir = (_namespaced_cache_dir(cache_dir, repo_id, revision)
+                 if cache_dir is not None else None)
     local = snapshot_download(
         repo_id,
         repo_type="dataset",
         revision=revision or None,
         allow_patterns=["meta/**", "data/**"],
-        local_dir=cache_dir,
+        local_dir=local_dir,
     )
     return Path(local)
 
